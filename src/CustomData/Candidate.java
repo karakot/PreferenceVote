@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class Candidate implements Comparable<Candidate>
 {
     private ArrayList<Vote> votes;
-    private final String name;
-    public Candidate (String name)
+    private final int name;
+    public Candidate (int name)
     {
         this.name = name;
     }

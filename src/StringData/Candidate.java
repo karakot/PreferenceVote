@@ -11,5 +11,5 @@ package StringData;
  */
 public class Candidate
 {
-    
+   
 }

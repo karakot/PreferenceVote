@@ -11,5 +11,13 @@ package StringData;
  */
 public class Vote
 {
-    
+    String vote;
+    public Vote (String vote)
+    {
+        this.vote = vote;
+    }
+    public int incrementVote ()
+    {
+        return 0;
+    }
 }

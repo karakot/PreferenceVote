@@ -12,9 +12,9 @@ import java.util.Stack;
  *
  * @author James
  */
-public class Vote implements Comparable<String>
+public class Vote implements Comparable<Integer>
 {
-    private Stack<String> vote;
+    private Stack<Integer> vote;
     private final int voterID; 
     public Vote ()
     {
@@ -25,11 +25,12 @@ public class Vote implements Comparable<String>
         voterID = ID;
         this.vote = vote;        
     }
-    public void setVote (Stack<String> vote)
+    public Vote setVote (Stack<Integer> vote)
     {
-        this.vote = (Stack<String>) vote.clone();
+        this.vote = (Stack<Integer>) vote.clone();
+        return this;
     }
-    public String peekNextPreference()
+    public int peekNextPreference()
     {
         return this.vote.peek();
     }
@@ -47,8 +48,8 @@ public class Vote implements Comparable<String>
     }
 
     @Override
-    public int compareTo(String name)
+    public int compareTo(Integer name)
     {
-        return peekNextPreference().compareTo(name);
+        return Integer.compare(this.peekNextPreference(), name);
     }
 }

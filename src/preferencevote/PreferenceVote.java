@@ -5,6 +5,9 @@
  */
 package preferencevote;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  *
  * @author James
@@ -18,6 +21,10 @@ public class PreferenceVote
     public static void main(String[] args)
     {
         // TODO code application logic here
+        Integer[] a  = {1,2,3,4,5};
+        System.out.println(Arrays.toString(a));
+        Collections.shuffle(Arrays.asList(a));
+        System.out.println(Arrays.toString(a));
     }
     
 }
