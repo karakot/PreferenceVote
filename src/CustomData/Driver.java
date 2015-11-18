@@ -5,6 +5,7 @@
  */
 package CustomData;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Stack;
@@ -20,6 +21,7 @@ public class Driver implements Runnable
 
     private static int NUMBER_OF_CANDIDATES;
     private static Driver instance = null;
+    private static Candidate[] ballot;
 
     protected Driver (int numberOfCandidates)
     {
@@ -47,15 +49,51 @@ public class Driver implements Runnable
         return new Vote().setVote(vote);
     }
 
+    private void reallocateVotes (ArrayList<Vote> votes)
+    {
+        for (Vote vote : votes)
+        {
+            int result = -1;
+            do
+            {
+                for (Candidate candidate : ballot)
+                {
+                    result = candidate.addVote(vote);
+                }
+                vote.incrementVote();
+                if (vote.isEmpty())
+                {
+                    result = 0;
+                }
+                
+            } while (result != 0);
+        }
+        Arrays.sort(ballot);
+    }
+
+    private int calculateWinner ()
+    {
+        int result = -1;
+        if (ballot == null)
+        {
+            return result;
+        }
+        Candidate loser = ballot[0];
+        ballot = Arrays.copyOfRange(ballot, 1, ballot.length);
+        reallocateVotes(loser.getVotes());
+        return result;
+
+    }
+
     @Override
     public void run ()
     {
-        Candidate[] ballot = new Candidate[NUMBER_OF_CANDIDATES];
+        ballot = new Candidate[NUMBER_OF_CANDIDATES];
         for (int i = 0; i < ballot.length; i++)
         {
             ballot[i] = new Candidate(i);
         }
-        Vote votes[] = new Vote[100];
+        Vote votes[] = new Vote[10];
         for (int i = 0; i < votes.length; i++)
         {
             votes[i] = generateRandomVote();
@@ -72,6 +110,13 @@ public class Driver implements Runnable
         {
             System.out.println(candidate.toString());
         }
+        System.out.println("");
+        calculateWinner();
+        for (Candidate candidate : ballot)
+        {
+            System.out.println(candidate.toString());
+        }
+        
         
     }
 }

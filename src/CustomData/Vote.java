@@ -8,52 +8,64 @@ package CustomData;
 import java.util.EmptyStackException;
 import java.util.Random;
 import java.util.Stack;
+
 /**
  *
  * @author James
  */
 public class Vote implements Comparable<Integer>
 {
+
     private Stack<Integer> vote;
-    private final int voterID; 
+    private final int voterID;
+
     public Vote ()
     {
         voterID = (new Random(System.currentTimeMillis())).nextInt();
     }
+
     public Vote (int ID, Stack vote)
     {
         voterID = ID;
-        this.vote = vote;        
+        this.vote = vote;
     }
+
     public Vote setVote (Stack<Integer> vote)
     {
         this.vote = (Stack<Integer>) vote.clone();
         return this;
     }
-    public int peekNextPreference()
+
+    public boolean isEmpty ()
+    {
+        return vote.isEmpty();
+    }
+
+    public int peekNextPreference ()
     {
         return this.vote.peek();
     }
+
     public int incrementVote ()
     {
-        try 
+        try
         {
             this.vote.pop();
             return 0;
-        }
-        catch (EmptyStackException ese)
+        } catch (EmptyStackException ese)
         {
             return -1;
         }
     }
 
     @Override
-    public int compareTo(Integer name)
+    public int compareTo (Integer name)
     {
         return Integer.compare(this.peekNextPreference(), name);
     }
+
     @Override
-    public String toString()
+    public String toString ()
     {
         return vote.toString();
     }

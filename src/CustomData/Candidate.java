@@ -26,7 +26,7 @@ public class Candidate implements Comparable<Candidate>
     public int addVote (Vote v)
     {
         int result = v.compareTo(name);
-        if (result == 0)
+        if (result == 0 && !v.isEmpty())
         {
             votes.add(v);
         }
@@ -38,12 +38,8 @@ public class Candidate implements Comparable<Candidate>
         return votes.size();
     }
 
-    public ArrayList<Vote> reassignVotes ()
+    public ArrayList<Vote> getVotes ()
     {
-        for (Vote vote : votes)
-        {
-            vote.incrementVote();
-        }
         return votes;
     }
 
