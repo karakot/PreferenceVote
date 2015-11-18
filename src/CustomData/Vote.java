@@ -52,4 +52,9 @@ public class Vote implements Comparable<Integer>
     {
         return Integer.compare(this.peekNextPreference(), name);
     }
+    @Override
+    public String toString()
+    {
+        return vote.toString();
+    }
 }

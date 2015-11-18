@@ -7,6 +7,7 @@ package preferencevote;
 
 import java.util.Arrays;
 import java.util.Collections;
+import CustomData.Driver;
 
 /**
  *
@@ -21,10 +22,13 @@ public class PreferenceVote
     public static void main(String[] args)
     {
         // TODO code application logic here
-        Integer[] a  = {1,2,3,4,5};
-        System.out.println(Arrays.toString(a));
-        Collections.shuffle(Arrays.asList(a));
-        System.out.println(Arrays.toString(a));
+//        Integer[] a  = {1,2,3,4,5};
+//        System.out.println(Arrays.toString(a));
+//        Collections.shuffle(Arrays.asList(a));
+//        System.out.println(Arrays.toString(a));
+        Driver driver = Driver.getInstance(3);
+        driver.run();
+        
     }
     
 }
