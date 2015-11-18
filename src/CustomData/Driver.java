@@ -51,22 +51,25 @@ public class Driver implements Runnable
 
     private void reallocateVotes (ArrayList<Vote> votes)
     {
-        for (Vote vote : votes)
+        for (Vote vote : votes) // for every vote in the votes to be reallocated
         {
             int result = -1;
-            do
+            while (result != 0)
             {
-                for (Candidate candidate : ballot)
-                {
-                    result = candidate.addVote(vote);
-                }
-                vote.incrementVote();
+                vote.incrementVote(); // the votes should not be incremented before this point
                 if (vote.isEmpty())
                 {
-                    result = 0;
+                    break;
                 }
-                
-            } while (result != 0);
+                for (Candidate candidate : ballot)
+                {
+                    result = candidate.addVote(vote); //check if the new vote can be entered in the current list of candidates enter if possible
+                    if (result == 0) // if a candidate is found then stop searching for candidates
+                    {
+                        break;
+                    }
+                }
+            } 
         }
         Arrays.sort(ballot);
     }
@@ -112,6 +115,7 @@ public class Driver implements Runnable
         }
         System.out.println("");
         calculateWinner();
+        System.out.println("");
         for (Candidate candidate : ballot)
         {
             System.out.println(candidate.toString());

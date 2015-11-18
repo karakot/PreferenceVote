@@ -25,8 +25,12 @@ public class Candidate implements Comparable<Candidate>
 
     public int addVote (Vote v)
     {
+        if (v.isEmpty())
+        {
+            return -1;
+        }
         int result = v.compareTo(name);
-        if (result == 0 && !v.isEmpty())
+        if (result == 0)
         {
             votes.add(v);
         }
