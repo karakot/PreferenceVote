@@ -7,7 +7,7 @@ package preferencevote;
 
 import java.util.Arrays;
 import java.util.Collections;
-import CustomData.Driver;
+import Structure.Driver;
 
 /**
  *
