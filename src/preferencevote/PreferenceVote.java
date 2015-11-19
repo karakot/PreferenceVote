@@ -26,7 +26,7 @@ public class PreferenceVote
 //        System.out.println(Arrays.toString(a));
 //        Collections.shuffle(Arrays.asList(a));
 //        System.out.println(Arrays.toString(a));
-        Driver driver = Driver.getInstance(3);
+        Driver driver = Driver.getInstance(9);
         driver.run();
         
     }

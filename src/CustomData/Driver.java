@@ -48,6 +48,16 @@ public class Driver implements Runnable
         Collections.shuffle(vote);
         return new Vote().setVote(vote);
     }
+    
+    private Vote[] generateRandomVoteList (int numberOfVotes)
+    {
+        Vote voteList[] = new Vote[numberOfVotes];
+        for (int i = 0; i < voteList.length; i++)
+        {
+            voteList[i] = generateRandomVote();
+        }
+        return voteList;
+    }
 
     private void reallocateVotes (ArrayList<Vote> votes)
     {
@@ -81,11 +91,14 @@ public class Driver implements Runnable
         {
             return result;
         }
-        Candidate loser = ballot[0];
-        ballot = Arrays.copyOfRange(ballot, 1, ballot.length);
-        reallocateVotes(loser.getVotes());
+        while (ballot.length != 2)
+        {
+            Candidate loser = ballot[0];
+            ballot = Arrays.copyOfRange(ballot, 1, ballot.length);
+            reallocateVotes(loser.getVotes());
+        }
         return result;
-
+       
     }
 
     @Override
@@ -96,11 +109,7 @@ public class Driver implements Runnable
         {
             ballot[i] = new Candidate(i);
         }
-        Vote votes[] = new Vote[10];
-        for (int i = 0; i < votes.length; i++)
-        {
-            votes[i] = generateRandomVote();
-        }
+        Vote votes[] = generateRandomVoteList(100);
         for (Vote vote : votes)
         {
             for (Candidate candidate : ballot)
